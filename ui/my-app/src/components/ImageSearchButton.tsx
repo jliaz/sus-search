@@ -9,6 +9,7 @@ interface ImageSearchButtonProps {
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
+    borderRadius: '50px'
   },
 }));
 
@@ -18,7 +19,7 @@ const ImageSearchButton = (props: ImageSearchButtonProps): React.ReactElement =>
   return (
     <Button
       variant="contained"
-      color="default"
+      color="primary"
       className={classes.button}
       startIcon={<ImageSearchIcon />}
       onClick = {() => {alert('t r i g g e r e d')}}
