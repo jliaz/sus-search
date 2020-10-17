@@ -3,7 +3,18 @@ import csv
 import os
 import requests
 
-# def tentreeMen
+def patagonia(imageLinks, prices, productLinks, productNames, companies, link):
+    page = requests.get(link)
+    soup = bs(page.text, 'html.parser')
+
+    productList = soup.find(name="div", attrs={"id": "productList"})
+    for a in productList.find_all(name="a"):
+        productLinks.append("https:/" + a["href"])
+        imageLinks.append(a.find(name="img")["data-src"])
+        prices.append(a.find(name="span", attrs={"class": "sqs-money-native"}).text)
+        productNames.append(a.find(name="div", attrs={"class": "product-title"}).text)
+        companies.append("The Ethical Silk Company")
+
 
 def kotn(imageLinks, prices, productLinks, productNames, companies, link):
     page = requests.get(link)
@@ -14,7 +25,7 @@ def kotn(imageLinks, prices, productLinks, productNames, companies, link):
             companies.append("Kotn")
             productNames.append(innerDiv.find_all(name="a")[1].text)
             productLinks.append("https://shop.kotn.com/" + innerDiv.find(name="a")["href"])
-            imageLinks.append(innerDiv.find("img")["data-src"])
+            imageLinks.append("https:" + innerDiv.find("img")["data-src"])
             priceElement = innerDiv.find(name="span", attrs={"class": "bc-sf-filter-product-item-regular-price"})
             if priceElement != None:
                 prices.append(innerDiv.find(name="span", attrs={"class": "bc-sf-filter-product-item-regular-price"}).text)
@@ -41,6 +52,7 @@ def biancaspender(imageLinks, prices, productLinks, productNames, companies):
     del productNames[0::2]
     del companies[0::2]
 
+
 def main():
     imageLinks = []
     prices = []
@@ -51,11 +63,11 @@ def main():
     biancaspender(imageLinks, prices, productLinks, productNames, companies)
     kotn(imageLinks, prices, productLinks, productNames, companies, 'https://shop.kotn.com/collections/mens')
     kotn(imageLinks, prices, productLinks, productNames, companies, 'https://shop.kotn.com/collections/womens')
+    patagonia(imageLinks, prices, productLinks, productNames, companies, 'https://www.theethicalsilkcompany.com/shop')
 
     # create table
-    for i in range(0, len(imageLinks)):
-        imageLinks[i] = "https:" + imageLinks[i]
-        print(productNames[i], prices[i], imageLinks[i], productLinks[i], companies[i])
+    # for i in range(0, len(imageLinks)):
+        #print(productNames[i], prices[i], imageLinks[i], productLinks[i], companies[i])
     table = [productNames, prices, productLinks, imageLinks, companies]
     table = list(zip(*table))
 
