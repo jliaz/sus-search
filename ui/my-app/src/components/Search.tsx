@@ -1,4 +1,3 @@
-import classes from '*.module.css';
 import { IconButton, InputBase, makeStyles, Paper, } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { borders } from '@material-ui/system';
