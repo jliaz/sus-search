@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: '35%',
   },
-
 }));
 
 const HomePage = (props: HomePageProps): React.ReactElement => {

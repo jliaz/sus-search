@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import HomePage from './screens/HomePage';
 import ResultsPage from './screens/ResultsPage';
+import NavBar from './components/NavBar';
 import './App.css';
 import {
   createMuiTheme,
@@ -25,6 +26,7 @@ function App() {
     <div className="App">
       <CssBaseline />
       <ThemeProvider theme={theme}>
+        <NavBar/>
         <Router>
           <Switch>
             <Route exact path="/">
@@ -36,7 +38,6 @@ function App() {
           </Switch>
         </Router>
       </ThemeProvider>
-      
     </div>
   );
 }
