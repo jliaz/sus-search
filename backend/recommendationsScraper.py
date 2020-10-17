@@ -3,8 +3,10 @@ import csv
 import os
 import requests
 
-def kotnMen(imageLinks, prices, productLinks, productNames, companies):
-    page = requests.get('https://shop.kotn.com/collections/mens-lounge?currency=CAD')
+# def tentreeMen
+
+def kotn(imageLinks, prices, productLinks, productNames, companies, link):
+    page = requests.get(link)
     soup = bs(page.text, 'html.parser')
 
     for productDiv in soup.find_all(name="div", attrs={"class": "bc-sf-filter-product-item"}):
@@ -47,7 +49,8 @@ def main():
     companies = []
 
     biancaspender(imageLinks, prices, productLinks, productNames, companies)
-    kotnMen(imageLinks, prices, productLinks, productNames, companies)
+    kotn(imageLinks, prices, productLinks, productNames, companies, 'https://shop.kotn.com/collections/mens')
+    kotn(imageLinks, prices, productLinks, productNames, companies, 'https://shop.kotn.com/collections/womens')
 
     # create table
     for i in range(0, len(imageLinks)):
