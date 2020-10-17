@@ -3,7 +3,18 @@ import csv
 import os
 import requests
 
-def patagonia(imageLinks, prices, productLinks, productNames, companies, link):
+def tuckerman(imageLinks, prices, productLinks, productNames, companies, link):
+    page = requests.get(link)
+    soup = bs(page.text, 'html.parser')
+
+    for product in soup.find_all(name='div', attrs={"class": "product-wrap"}):
+        productLinks.append("https://www.tuckerman.co" + product.find(name="a")["href"])
+        imageLinks.append("https:" + product.find(name="img")["src"])
+        productNames.append(product.find(name="span", attrs={"class": "title"}).text)
+        prices.append(product.find(name="span", attrs={"class": "money"}).text)
+        companies.append("Tuckerman & Co")
+
+def ethicalsilkcompany(imageLinks, prices, productLinks, productNames, companies, link):
     page = requests.get(link)
     soup = bs(page.text, 'html.parser')
 
@@ -63,8 +74,9 @@ def main():
     biancaspender(imageLinks, prices, productLinks, productNames, companies)
     kotn(imageLinks, prices, productLinks, productNames, companies, 'https://shop.kotn.com/collections/mens')
     kotn(imageLinks, prices, productLinks, productNames, companies, 'https://shop.kotn.com/collections/womens')
-    patagonia(imageLinks, prices, productLinks, productNames, companies, 'https://www.theethicalsilkcompany.com/shop')
-
+    ethicalsilkcompany(imageLinks, prices, productLinks, productNames, companies, 'https://www.theethicalsilkcompany.com/shop')
+    tuckerman(imageLinks, prices, productLinks, productNames, companies, 'https://www.tuckerman.co/collections/mens-shirts')
+    tuckerman(imageLinks, prices, productLinks, productNames, companies, 'https://www.tuckerman.co/collections/womens-shirts')
     # create table
     # for i in range(0, len(imageLinks)):
         #print(productNames[i], prices[i], imageLinks[i], productLinks[i], companies[i])
