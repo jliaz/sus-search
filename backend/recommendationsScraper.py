@@ -42,6 +42,11 @@ def main():
     companies = []
 
     biancaspender(imageLinks, prices, productLinks, productNames, companies)
+    del imageLinks[0::2]
+    del prices[0::2]
+    del productLinks[0::2]
+    del productNames[0::2]
+    del companies[0::2]
     kotnMen(imageLinks, prices, productLinks, productNames, companies)
 
     for i in range(0, len(imageLinks)):
