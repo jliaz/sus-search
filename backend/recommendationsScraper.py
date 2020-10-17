@@ -3,8 +3,32 @@ import csv
 import os
 import requests
 
-def kotnMen(imageLinks, prices, productLinks, productNames, companies):
-    page = requests.get('https://shop.kotn.com/collections/mens-lounge?currency=CAD')
+def tuckerman(imageLinks, prices, productLinks, productNames, companies, link):
+    page = requests.get(link)
+    soup = bs(page.text, 'html.parser')
+
+    for product in soup.find_all(name='div', attrs={"class": "product-wrap"}):
+        productLinks.append("https://www.tuckerman.co" + product.find(name="a")["href"])
+        imageLinks.append("https:" + product.find(name="img")["src"])
+        productNames.append(product.find(name="span", attrs={"class": "title"}).text)
+        prices.append(product.find(name="span", attrs={"class": "money"}).text)
+        companies.append("Tuckerman & Co")
+
+def ethicalsilkcompany(imageLinks, prices, productLinks, productNames, companies, link):
+    page = requests.get(link)
+    soup = bs(page.text, 'html.parser')
+
+    productList = soup.find(name="div", attrs={"id": "productList"})
+    for a in productList.find_all(name="a"):
+        productLinks.append("https:/" + a["href"])
+        imageLinks.append(a.find(name="img")["data-src"])
+        prices.append(a.find(name="span", attrs={"class": "sqs-money-native"}).text)
+        productNames.append(a.find(name="div", attrs={"class": "product-title"}).text)
+        companies.append("The Ethical Silk Company")
+
+
+def kotn(imageLinks, prices, productLinks, productNames, companies, link):
+    page = requests.get(link)
     soup = bs(page.text, 'html.parser')
 
     for productDiv in soup.find_all(name="div", attrs={"class": "bc-sf-filter-product-item"}):
@@ -12,7 +36,7 @@ def kotnMen(imageLinks, prices, productLinks, productNames, companies):
             companies.append("Kotn")
             productNames.append(innerDiv.find_all(name="a")[1].text)
             productLinks.append("https://shop.kotn.com/" + innerDiv.find(name="a")["href"])
-            imageLinks.append(innerDiv.find("img")["data-src"])
+            imageLinks.append("https:" + innerDiv.find("img")["data-src"])
             priceElement = innerDiv.find(name="span", attrs={"class": "bc-sf-filter-product-item-regular-price"})
             if priceElement != None:
                 prices.append(innerDiv.find(name="span", attrs={"class": "bc-sf-filter-product-item-regular-price"}).text)
@@ -39,6 +63,7 @@ def biancaspender(imageLinks, prices, productLinks, productNames, companies):
     del productNames[0::2]
     del companies[0::2]
 
+
 def main():
     imageLinks = []
     prices = []
@@ -47,12 +72,14 @@ def main():
     companies = []
 
     biancaspender(imageLinks, prices, productLinks, productNames, companies)
-    kotnMen(imageLinks, prices, productLinks, productNames, companies)
-
+    kotn(imageLinks, prices, productLinks, productNames, companies, 'https://shop.kotn.com/collections/mens')
+    kotn(imageLinks, prices, productLinks, productNames, companies, 'https://shop.kotn.com/collections/womens')
+    ethicalsilkcompany(imageLinks, prices, productLinks, productNames, companies, 'https://www.theethicalsilkcompany.com/shop')
+    tuckerman(imageLinks, prices, productLinks, productNames, companies, 'https://www.tuckerman.co/collections/mens-shirts')
+    tuckerman(imageLinks, prices, productLinks, productNames, companies, 'https://www.tuckerman.co/collections/womens-shirts')
     # create table
-    for i in range(0, len(imageLinks)):
-        imageLinks[i] = "https:" + imageLinks[i]
-        print(productNames[i], prices[i], imageLinks[i], productLinks[i], companies[i])
+    # for i in range(0, len(imageLinks)):
+        #print(productNames[i], prices[i], imageLinks[i], productLinks[i], companies[i])
     table = [productNames, prices, productLinks, imageLinks, companies]
     table = list(zip(*table))
 
