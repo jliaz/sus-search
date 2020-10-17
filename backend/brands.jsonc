@@ -1,0 +1,25 @@
+// sustainability information can be found on https://directory.goodonyou.eco/
+// no accessories, specialty clothing or shoes
+
+// Julia, please add more womenswear as appropriate
+
+[{"asket": "https://www.asket.com/"}, // mens basic variety, cotton dominant, full supply chain traceability
+ {"kotn": "https://kotn.com/"}, // basic variety, cotton dominant, colorful though
+ {"tentree": "https://www.tentree.com/"}, // basic variety, cotton dominant, brand plants trees
+ {"Reformation": "https://www.thereformation.com/"}, // we've finally got some womens design, dresses and jeans 
+ {"Patagonia": "https://www.patagonia.ca/home/"}, // staple active/outerwear, "wornwear"
+ {"Boody": "https://www.boody.com.au/"}, // activewear, innerwear
+ {"Nudie Jeans": "https://www.nudiejeans.com/"}, // jeans and denim jacket
+ {"Story mfg.": "https://www.storymfg.com/"}, // quirky tops, light jackets and pants
+ {"Outerknown": "https://www.outerknown.com/"}, // everything
+ {"Tuckerman & Co": "https://www.tuckerman.co/"}, // dressier shirts
+ {"Stella McCartney": "https://www.stellamccartney.com/"}, // designs of a variety leaning towards womenswear
+ {"Untouched World": "https://www.untouchedworld.com/"}, // knits focused
+ {"kowtow": "https://nz.kowtowclothing.com/"}, // womens design pieces
+ {"wuxly": "https://wuxly.com/"}, // one among very few with heavy outerwear
+ {"Bianca Spencer": "https://biancaspender.com/"}, // womens big pieces
+ {"KnowledgeCotton Apparel": "https://knowledgecottonapparel.com/"}, // a big selection of mens outdoorsy stuff
+ {"The Ethical Silk Company": "https://www.theethicalsilkcompany.com/shop/"}, // womens silk dominant lounge/sleepwear
+ {"noctu": "https://noctu.co.uk/"}, // cotton dominant sleepwear
+ {"Marks & Spencer": "https://www.marksandspencer.com/"} // everything, probably more item count than all previous combined 
+]
