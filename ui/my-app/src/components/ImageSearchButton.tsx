@@ -42,7 +42,7 @@ const ImageSearchButton = (props: ImageSearchButtonProps): React.ReactElement =>
       <label htmlFor="contained-button-file">
         <Button
           variant="contained"
-          color="default"
+          color="primary"
           component="span"
           className={classes.button}
           startIcon={<ImageSearchIcon />}
