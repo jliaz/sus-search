@@ -23,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function submit() {
+  alert("sus");
+}
+
 const Search = (props: SearchProps): React.ReactElement => {
   const classes = useStyles();
 
@@ -32,7 +36,7 @@ const Search = (props: SearchProps): React.ReactElement => {
         className={classes.input}
         placeholder="Search..."
       />
-      <IconButton type="submit" className={classes.iconButton} onClick={() => { alert("sus") }}>
+      <IconButton type="submit" className={classes.iconButton} onClick={() => submit()}>
         <SearchIcon />
       </IconButton>
     </Paper>
