@@ -40,6 +40,7 @@ const Search = (props: SearchProps): React.ReactElement => {
       <InputBase
         className={classes.input}
         placeholder="Search..."
+        color="secondary"
       />
       <IconButton type="submit" className={classes.iconButton} onClick={() => submit()}>
         <SearchIcon />
