@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: theme.spacing(1),
+    borderRadius:'50px',
+    maxHeight: '45px',
+    minHeight: '45px',
   },
   input: {
     display: 'none',
