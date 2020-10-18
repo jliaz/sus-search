@@ -5,6 +5,7 @@ import ImageSearchButton from '../components/ImageSearchButton';
 import Header from '../components/Header';
 import { Grid, GridListTileBar, makeStyles } from '@material-ui/core';
 import ProductCard from '../components/ProductCard';
+import { useHistory } from "react-router-dom";
 
 interface HomePageProps {
 
@@ -22,6 +23,17 @@ const useStyles = makeStyles((theme) => ({
 
 const HomePage = (props: HomePageProps): React.ReactElement => {
   const classes = useStyles();
+  const history = useHistory();
+
+  console.log(history);
+
+  const onSearch = (searchText: string) => {
+      console.log("SEARCHHHH");
+      history.push({
+          pathname: '/results',
+          search: searchText
+      });
+  }
 
   return (
     <div>
@@ -32,17 +44,17 @@ const HomePage = (props: HomePageProps): React.ReactElement => {
         className={classes.root}
       >
         <Grid item className={classes.header}>
-          <Header />
+            <Header/>
         </Grid>
         <Grid
-          container
-          item
-          direction="row"
-          justify="center"
-          alignItems="center"
+            container
+            item
+            direction="row"
+            justify="center"
+            alignItems="center"
         >
-          <Search></Search>
-          <ImageSearchButton></ImageSearchButton>
+            <Search onSearch={onSearch}></Search>
+            <ImageSearchButton></ImageSearchButton>
         </Grid>
       </Grid>
 
