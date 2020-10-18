@@ -17,7 +17,7 @@ PRODUCT_SET_ID = 'product_set'
 PRODUCT_CATEGORY = 'apparel-v2'
 IMAGE_BUCKET = 'dubhacks-ref-images'
 VISION_BUCKET = 'dubhacks-vision-bucket'
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/content/dubhacks-292818-f5faadd48adf.json' # TODO
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/content/dubhacks-292818-2f87e46570da.json' # TODO
 os.environ['PROJECT_ID'] = PROJECT_ID
 os.environ['LOCATION_ID'] = LOCATION_ID
 
