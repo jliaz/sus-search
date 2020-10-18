@@ -19,11 +19,16 @@ interface ProductCardProps {
 }
 
 const useStyles = makeStyles({
+    cardAction: {
+        display: 'block',
+        textAlign: 'initial'
+    },
     root: {
         maxWidth: 350,
+        minWidth: 350,
     },
     media: {
-        height: 400,
+        height: 450,
     },
 });
 

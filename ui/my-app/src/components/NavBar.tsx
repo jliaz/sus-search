@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Search from '../components/Search';
 import ImageSearchButton from '../components/ImageSearchButton';
 import Header from '../components/Header';
@@ -16,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
         minHeight: '65px'
     }
-  }));
+}));
 
 const NavBar = (props: NavBarProps): React.ReactElement => {
     const classes = useStyles();
@@ -29,28 +28,28 @@ const NavBar = (props: NavBarProps): React.ReactElement => {
             search: searchText
         });
     }
-    return(
+    return (
         <div>
             <AppBar position="static" color="transparent" className={classes.appBar}>
-                <Grid 
+                <Grid
                     container
                     direction="row"
                     justify="space-between"
                     alignItems="center"
                 >
                     <Grid item>
-                        {window.location.pathname !== '/adadad' ? 
-                        <Grid
-                            container
-                            direction="row"
-                            alignItems="center"
-                            spacing={1}
-                        >
-                            <Grid item> <Header inAppBar={true}/> </Grid>
-                            <Grid item> <Search placeholderText="Search another..." onSearch={onSearch}></Search> </Grid>
-                            <Grid item> <ImageSearchButton></ImageSearchButton> </Grid>
-                        </Grid> : 
-                        <div></div>}
+                        {window.location.pathname !== '/adadad' ?
+                            <Grid
+                                container
+                                direction="row"
+                                alignItems="center"
+                                spacing={1}
+                            >
+                                <Grid item> <Header inAppBar={true} /> </Grid>
+                                <Grid item> <Search placeholderText="Search another..." onSearch={onSearch}></Search> </Grid>
+                                <Grid item> <ImageSearchButton></ImageSearchButton> </Grid>
+                            </Grid> :
+                            <div></div>}
                     </Grid>
                     <Grid item>
                         <Button color="secondary">
@@ -61,8 +60,8 @@ const NavBar = (props: NavBarProps): React.ReactElement => {
                         </Button>
                     </Grid>
                 </Grid>
-                
-                
+
+
 
             </AppBar>
         </div>
