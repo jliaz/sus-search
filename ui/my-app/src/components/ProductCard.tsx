@@ -7,7 +7,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Grid } from '@material-ui/core';
+import { ButtonBase, Grid } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 
 interface ProductCardProps {
@@ -19,11 +20,16 @@ interface ProductCardProps {
 }
 
 const useStyles = makeStyles({
+    cardAction: {
+        display: 'block',
+        textAlign: 'initial'
+    },
     root: {
         maxWidth: 350,
+        minWidth: 350,
     },
     media: {
-        height: 400,
+        height: 450,
     },
 });
 

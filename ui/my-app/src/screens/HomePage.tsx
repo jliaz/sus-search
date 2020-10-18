@@ -28,45 +28,34 @@ const HomePage = (props: HomePageProps): React.ReactElement => {
   console.log(history);
 
   const onSearch = (searchText: string) => {
-      console.log("SEARCHHHH");
-      history.push({
-          pathname: '/results',
-          search: searchText
-      });
+    console.log("SEARCHHHH");
+    history.push({
+      pathname: '/results',
+      search: searchText
+    });
   }
 
   return (
-    <div>
+    <Grid
+      container
+      justify="center"
+      alignItems="center"
+      className={classes.root}
+    >
+      <Grid item className={classes.header}>
+        <Header />
+      </Grid>
       <Grid
         container
+        item
+        direction="row"
         justify="center"
         alignItems="center"
-        className={classes.root}
       >
-        <Grid item className={classes.header}>
-            <Header/>
-        </Grid>
-        <Grid
-            container
-            item
-            direction="row"
-            justify="center"
-            alignItems="center"
-        >
-            <Search onSearch={onSearch}></Search>
-            <ImageSearchButton></ImageSearchButton>
-        </Grid>
+        <Search onSearch={onSearch}></Search>
+        <ImageSearchButton></ImageSearchButton>
       </Grid>
-
-      <ProductCard
-        productName="Green Lizard"
-        companyName="The Lizard Company"
-        price={125}
-        productLink="https://www.nationalgeographic.com/animals/reptiles/"
-        imageLink="https://www.nationalgeographic.com/content/dam/animals/pictures/hero/reptiles-hero.jpg"></ProductCard>
-    </div>
-
-
+    </Grid>
   )
 }
 
