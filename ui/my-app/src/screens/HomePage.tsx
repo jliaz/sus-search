@@ -35,21 +35,12 @@ const HomePage = (props: HomePageProps): React.ReactElement => {
   }
 
   return (
-    <Grid
-      container
-      justify="center"
-      alignItems="center"
-      className={classes.root}
-    >
-      <Grid item className={classes.header}>
-        <Header />
-      </Grid>
+    <div>
       <Grid
         container
-        item
-        direction="row"
         justify="center"
         alignItems="center"
+        className={classes.root}
       >
         <Grid item className={classes.header}>
             <Header/>
@@ -65,7 +56,14 @@ const HomePage = (props: HomePageProps): React.ReactElement => {
             <ImageSearchButton></ImageSearchButton>
         </Grid>
       </Grid>
-    </Grid>
+
+      <ProductCard
+        productName="Green Lizard"
+        companyName="The Lizard Company"
+        price={125}
+        productLink="https://www.nationalgeographic.com/animals/reptiles/"
+        imageLink="https://www.nationalgeographic.com/content/dam/animals/pictures/hero/reptiles-hero.jpg"></ProductCard>
+    </div>
 
 
   )
