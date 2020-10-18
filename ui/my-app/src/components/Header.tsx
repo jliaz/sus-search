@@ -19,6 +19,7 @@ const Header = (props: HeaderProps): React.ReactElement => {
         container
         justify="flex-start"
         alignItems="center"
+        onClick={()=> {console.log("clicked on header")}} //todo: redirect to homepage on click
       >
           <Grid item>
             <img src={logo} alt="Logo" style={{width: inAppBar ? "40px" : "60px"}}/>

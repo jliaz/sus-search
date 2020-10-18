@@ -4,6 +4,7 @@ import Search from '../components/Search';
 import ImageSearchButton from '../components/ImageSearchButton';
 import Header from '../components/Header';
 import { Grid, AppBar, makeStyles, Button } from '@material-ui/core';
+import { useHistory } from "react-router-dom";
 
 interface NavBarProps {
 
@@ -20,6 +21,14 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = (props: NavBarProps): React.ReactElement => {
     const classes = useStyles();
     console.log(window.location.pathname);
+    const history = useHistory();
+
+    const onSearch = (searchText: string) => {
+        history.push({
+            pathname: '/results',
+            search: searchText
+        });
+    }
     return(
         <div>
             <AppBar position="static" color="transparent" className={classes.appBar}>
@@ -30,7 +39,7 @@ const NavBar = (props: NavBarProps): React.ReactElement => {
                     alignItems="center"
                 >
                     <Grid item>
-                        {window.location.pathname !== '/' ? 
+                        {window.location.pathname !== '/adadad' ? 
                         <Grid
                             container
                             direction="row"
@@ -38,7 +47,7 @@ const NavBar = (props: NavBarProps): React.ReactElement => {
                             spacing={1}
                         >
                             <Grid item> <Header inAppBar={true}/> </Grid>
-                            <Grid item> <Search></Search> </Grid>
+                            <Grid item> <Search placeholderText="Search another..." onSearch={onSearch}></Search> </Grid>
                             <Grid item> <ImageSearchButton></ImageSearchButton> </Grid>
                         </Grid> : 
                         <div></div>}
