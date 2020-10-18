@@ -3,6 +3,23 @@ import csv
 import os
 import requests
 
+
+def test(imageLinks, prices, productLinks, productNames, companies, link):
+    page = requests.get(link)
+    soup = bs(page.text, 'html.parser')
+
+    products = soup.find(name="div", attrs={"class": "product-grid product-grid--browse"})
+    for product in products.find_all(name="div", attrs={"class": "product-grid__cell"}):
+        a = product.find(name="a")
+        if a["href"][1:6] != "pages" and product.find(name="h2", attrs={"class": "product-summary__name"}) != None:
+            productLinks.append("https://www.thereformation.com" + a["href"])
+            imageLinks.append(a.find(name="img")["data-src"])
+            productNames.append(product.find(name="h2", attrs={"class": "product-summary__name"}).text.strip())
+            print(productNames[-1])
+            prices.append(product.find(name="p", attrs={"class": "product-prices__price"}).find(name="span").text.strip())
+            companies.append("The Reformation")
+
+
 def storymfg(imageLinks, prices, productLinks, productNames, companies, link):
     page = requests.get(link)
     soup = bs(page.text, 'html.parser')
@@ -91,6 +108,7 @@ def main():
     tuckerman(imageLinks, prices, productLinks, productNames, companies, 'https://www.tuckerman.co/collections/mens-shirts')
     tuckerman(imageLinks, prices, productLinks, productNames, companies, 'https://www.tuckerman.co/collections/womens-shirts')
     storymfg(imageLinks, prices, productLinks, productNames, companies, 'https://www.storymfg.com/collections/shop-all')
+    test(imageLinks, prices, productLinks, productNames, companies, 'https://www.thereformation.com/categories/all-clothing')
 
     # create table
     # for i in range(0, len(imageLinks)):
