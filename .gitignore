@@ -1,3 +1,5 @@
 node_modules/
 
 backend/content/*.json
+
+backend/__pycache__/*
