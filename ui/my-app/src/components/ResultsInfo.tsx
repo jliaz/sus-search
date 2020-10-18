@@ -4,7 +4,7 @@ import { Grid, makeStyles, Typography, Box, Chip } from '@material-ui/core';
 
 
 interface ResultsInfoProps {
-
+    image: string;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -21,9 +21,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ResultsInfo = (props: ResultsInfoProps): React.ReactElement => {
+    const { image } = props;
     const classes = useStyles();
     const attributes = ['Pants', 'Denim', 'Light Blue', 'Sweater'];
-    const imgSrc = 'https://akindofguise.com/app/uploads/kilkee_vest_darksaphire_0096-1000x1500.jpg';
+    
 
     const renderAttributeChips = (): React.ReactElement => {
         let chips: Array<React.ReactElement> = [];
@@ -58,7 +59,7 @@ const ResultsInfo = (props: ResultsInfoProps): React.ReactElement => {
                     </Typography>
                 </Grid>
                 <Grid item>
-                    <img src={imgSrc} alt="Logo" style={{ width: '100%' }} />
+                    <img src={image} alt="Logo" style={{ width: '100%' }} />
                 </Grid>
                 <Grid item>
                     {renderAttributeChips()}

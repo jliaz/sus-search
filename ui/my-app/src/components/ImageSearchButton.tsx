@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 
 interface ImageSearchButtonProps {
-
+    onSearch: Function;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -24,19 +24,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ImageSearchButton = (props: ImageSearchButtonProps): React.ReactElement => {
+  const { onSearch } = props;
   const classes = useStyles();
 
   const [img, setImg] = useState("");
+
+  const onFileUpload = (event: any) => {
+      setImg(event.target.value);
+      onSearch(event.target.value);
+  }
 
   return (
     <div className={classes.root}>
       <input
         accept="image/*"
         className={classes.input}
+        name="file"
         id="contained-button-file"
         type="file"
         onChange={(event) =>
-          setImg(event.target.value)}
+          onFileUpload(event)}
       />
       <label htmlFor="contained-button-file">
         <Button

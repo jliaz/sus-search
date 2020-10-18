@@ -3,11 +3,11 @@ import React from 'react';
 import ProductCard from './ProductCard';
 
 interface RecommendationSpecs {
-    productName: string,
-    companyName: string,
-    price: number,
-    productLink: string,
+    brand: string,
     imageLink: string,
+    link: string,
+    name: string,
+    price: number,
 }
 
 interface RecommendationsProps {
@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
     }, 
     root: {
         maxWidth: '65%',
-        marginLeft: '30%'
+        marginLeft: 600,
+        
     }
 }));
 
@@ -32,10 +33,10 @@ const Recommendations = (props: RecommendationsProps): React.ReactElement => {
         let code: Array<React.ReactElement> = [];
         specs.forEach((spec) => {
             code.push(<ProductCard
-                productName={spec.productName}
-                companyName={spec.companyName}
+                productName={spec.name}
+                companyName={spec.brand}
                 price={spec.price}
-                productLink={spec.productLink}
+                productLink={spec.link}
                 imageLink={spec.imageLink}></ProductCard>)
         })
         return (

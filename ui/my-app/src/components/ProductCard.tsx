@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
+import { stringify } from 'querystring';
 
 
 interface ProductCardProps {
@@ -30,16 +31,25 @@ const useStyles = makeStyles((theme) => ({
     },
     media: {
         height: 450,
+
     },
 }));
 
+
 const ProductCard = (props: ProductCardProps): React.ReactElement => {
     const classes = useStyles();
-    const productName = props.productName;
-    const companyName = props.companyName;
-    const price = props.price;
-    const productLink = props.productLink;
-    const imageLink = props.imageLink;
+    const { productName, companyName, price, productLink, imageLink } = props;
+
+    const fixCasing = (name: string): string => {
+        var newName: string;
+        newName = '';
+        name.split(' ').forEach( (word) => {
+            newName += word[0].toUpperCase() + word.substring(1, word.length).toLowerCase() + ' ';
+        });
+
+
+        return newName;
+    }
 
     return (
         <Card className={classes.root}>
@@ -51,10 +61,10 @@ const ProductCard = (props: ProductCardProps): React.ReactElement => {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        {productName}
+                        {fixCasing(productName)}
                     </Typography>
                     <Typography variant="subtitle1" component="p">
-                        {companyName} · ${price}
+                        {companyName} · {price}
                     </Typography>
                 </CardContent>
             </CardActionArea>
