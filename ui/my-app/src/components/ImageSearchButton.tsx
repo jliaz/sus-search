@@ -1,13 +1,9 @@
 import { Button, makeStyles } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 
 interface ImageSearchButtonProps {
 
-}
-
-function submit() {
-  alert('robbie sucks');
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -18,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: theme.spacing(1),
-    borderRadius:'50px',
+    borderRadius: '50px',
     maxHeight: '45px',
     minHeight: '45px',
   },
@@ -30,14 +26,17 @@ const useStyles = makeStyles((theme) => ({
 const ImageSearchButton = (props: ImageSearchButtonProps): React.ReactElement => {
   const classes = useStyles();
 
+  const [img, setImg] = useState("");
+
   return (
     <div className={classes.root}>
       <input
         accept="image/*"
         className={classes.input}
         id="contained-button-file"
-        multiple
         type="file"
+        onChange={(event) =>
+          setImg(event.target.value)}
       />
       <label htmlFor="contained-button-file">
         <Button
@@ -46,7 +45,6 @@ const ImageSearchButton = (props: ImageSearchButtonProps): React.ReactElement =>
           component="span"
           className={classes.button}
           startIcon={<ImageSearchIcon />}
-        // onClick={() => submit()}
         >
           Image Search
         </Button>
