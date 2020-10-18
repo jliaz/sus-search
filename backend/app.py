@@ -39,9 +39,12 @@ def test():
 def getImageSearches():
 	image_uri = request.args.get('uri')
 	search_results = get_similar_products_uri(PROJECT_ID, LOCATION_ID, PRODUCT_SET_ID, 'apparel-v2', image_uri, '')
-	search_results = jsonify(results=search_results)
+	print(search_results)
+	search_results = jsonify(search_results)
 	print("API RESULTS")
 	print(search_results)
 	return search_results
 
-
+@app.route("/textSearch", methods=["GET"])
+def getTextSearches():
+	return "SUCCESS"
