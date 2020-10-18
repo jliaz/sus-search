@@ -69,7 +69,7 @@ def biancaspender(imageLinks, prices, productLinks, productNames, companies):
             productLinks.append("https://biancaspender.com" + a["href"])
             for picture in a.find_all(name="picture"):
                 for img in picture.find_all(name="img"):
-                    imageLinks.append(img["data-src"])
+                    imageLinks.append("https:" + img["data-src"])
     del imageLinks[0::2]
     del prices[0::2]
     del productLinks[0::2]
