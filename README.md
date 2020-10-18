@@ -1,4 +1,4 @@
-# sus-search
+# SlowMoIt
 DubHacks 2020 canvas track
 
 ## Inspiration
