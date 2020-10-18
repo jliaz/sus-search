@@ -33,6 +33,7 @@ const ImageSearchButton = (props: ImageSearchButtonProps): React.ReactElement =>
       <input
         accept="image/*"
         className={classes.input}
+        name="file"
         id="contained-button-file"
         type="file"
         onChange={(event) =>
