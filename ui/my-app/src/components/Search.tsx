@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function submit() {
-  alert("sus");
+function submit(searchContent: String) {
+  console.log(searchContent);
 }
 
 const Search = (props: SearchProps): React.ReactElement => {
@@ -42,7 +42,7 @@ const Search = (props: SearchProps): React.ReactElement => {
         color="secondary"
         onChange={(event) => setContent(event.target.value)}
       />
-      <IconButton type="submit" className={classes.iconButton} onClick={() => alert(searchContent)}>
+      <IconButton className={classes.iconButton} onClick={() => submit(searchContent)}>
         <SearchIcon />
       </IconButton>
     </Paper>
