@@ -7,7 +7,7 @@ interface ImageSearchButtonProps {
 }
 
 function submit() {
-  alert('t r i g g e r e d');
+  alert('robbie sucks');
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +42,7 @@ const ImageSearchButton = (props: ImageSearchButtonProps): React.ReactElement =>
       <label htmlFor="contained-button-file">
         <Button
           variant="contained"
-          color="default"
+          color="primary"
           component="span"
           className={classes.button}
           startIcon={<ImageSearchIcon />}

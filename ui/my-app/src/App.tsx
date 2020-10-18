@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import HomePage from './screens/HomePage';
 import ResultsPage from './screens/ResultsPage';
+import NavBar from './components/NavBar';
 import './App.css';
 import {
   createMuiTheme,
@@ -16,15 +17,17 @@ function App() {
   /** Global colour palette */
   const theme = createMuiTheme({
     palette: {
-      primary: { main: '#A1E2FF'},
+      primary: { main: '#7289DA'},
       secondary: { main: '#FCFAF8'},
+      background: { default: '#36393f'},
     }
   })
   
   return (
-    <div className="App">
+    <div className="App" color='background'>
       <CssBaseline />
       <ThemeProvider theme={theme}>
+        <NavBar/>
         <Router>
           <Switch>
             <Route exact path="/">
@@ -36,7 +39,6 @@ function App() {
           </Switch>
         </Router>
       </ThemeProvider>
-      
     </div>
   );
 }
