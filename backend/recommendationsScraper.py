@@ -4,7 +4,21 @@ import os
 import requests
 
 
-def test(imageLinks, prices, productLinks, productNames, companies, link):
+def wuxly(imageLinks, prices, productLinks, productNames, companies, link):
+    page = requests.get(link)
+    soup = bs(page.text, 'html.parser')
+
+    products = soup.find(name="div", attrs={"class": "grid grid--uniform"})
+    for product in products.find_all(name="div", attrs={"class": "grid-product__content"}):
+        a = product.find(name="a")
+        imageLinks.append("https:" + a.find(name="div", attrs={"class": "grid__image-ratio grid__image-ratio--square lazyload"})["data-bgset"].split(",")[-1].strip().split(' ')[0])
+        productLinks.append("https://www.wixly.com" + a["href"])
+        productNames.append(a.find(name="div", attrs={"class": "grid-product__title"}).text)
+        prices.append(a.find(name="div", attrs={"class": "grid-product__price"}).text.strip())
+        companies.append("Wuxly")
+
+
+def thereformation(imageLinks, prices, productLinks, productNames, companies, link):
     page = requests.get(link)
     soup = bs(page.text, 'html.parser')
 
@@ -15,7 +29,6 @@ def test(imageLinks, prices, productLinks, productNames, companies, link):
             productLinks.append("https://www.thereformation.com" + a["href"])
             imageLinks.append(a.find(name="img")["data-src"])
             productNames.append(product.find(name="h2", attrs={"class": "product-summary__name"}).text.strip())
-            print(productNames[-1])
             prices.append(product.find(name="p", attrs={"class": "product-prices__price"}).find(name="span").text.strip())
             companies.append("The Reformation")
 
@@ -108,7 +121,9 @@ def main():
     tuckerman(imageLinks, prices, productLinks, productNames, companies, 'https://www.tuckerman.co/collections/mens-shirts')
     tuckerman(imageLinks, prices, productLinks, productNames, companies, 'https://www.tuckerman.co/collections/womens-shirts')
     storymfg(imageLinks, prices, productLinks, productNames, companies, 'https://www.storymfg.com/collections/shop-all')
-    test(imageLinks, prices, productLinks, productNames, companies, 'https://www.thereformation.com/categories/all-clothing')
+    thereformation(imageLinks, prices, productLinks, productNames, companies, 'https://www.thereformation.com/categories/all-clothing')
+    wuxly(imageLinks, prices, productLinks, productNames, companies, 'https://wuxly.com/collections/mens')
+    wuxly(imageLinks, prices, productLinks, productNames, companies, 'https://wuxly.com/collections/womens')
 
     # create table
     # for i in range(0, len(imageLinks)):
