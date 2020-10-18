@@ -2,7 +2,8 @@ import React from 'react';
 
 import Search from '../components/Search';
 import ImageSearchButton from '../components/ImageSearchButton';
-import { Grid, makeStyles } from '@material-ui/core';
+import Header from '../components/Header';
+import { Grid, GridListTileBar, makeStyles } from '@material-ui/core';
 
 interface HomePageProps {
 
@@ -19,16 +20,29 @@ const HomePage = (props: HomePageProps): React.ReactElement => {
   const classes = useStyles();
 
   return (
-      <Grid
+      <Grid 
         container
-        direction="row"
         justify="center"
         alignItems="center"
         className={classes.root}
+        spacing={4}
       >
-        <Search></Search>
-        <ImageSearchButton></ImageSearchButton>
+        <Grid item>
+            <Header/>
+        </Grid>
+        <Grid
+            container
+            item
+            direction="row"
+            justify="center"
+            alignItems="center"
+        >
+            <Search></Search>
+            <ImageSearchButton></ImageSearchButton>
+        </Grid>
       </Grid>
+    
+
   )
 }
 

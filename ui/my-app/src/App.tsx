@@ -17,7 +17,7 @@ function App() {
   /** Global colour palette */
   const theme = createMuiTheme({
     palette: {
-      primary: { main: '#7289DA'},
+      primary: { main: '#A1E2FF'},
       secondary: { main: '#FCFAF8'},
       background: { default: '#36393f'},
     }
@@ -25,8 +25,8 @@ function App() {
   
   return (
     <div className="App" color='background'>
-      <CssBaseline />
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <NavBar/>
         <Router>
           <Switch>

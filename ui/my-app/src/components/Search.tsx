@@ -24,15 +24,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function submit(searchContent: String) {
-  console.log(searchContent);
+function submit(content: string) {
+  console.log(content);
 }
 
 const Search = (props: SearchProps): React.ReactElement => {
   const classes = useStyles();
   const { placeholderText } = props;
 
-  const [searchContent, setContent] = useState("");
+  const [content, setContent] = useState("");
 
   return (
     <Paper component="form" className={classes.root}>
@@ -42,7 +42,7 @@ const Search = (props: SearchProps): React.ReactElement => {
         color="secondary"
         onChange={(event) => setContent(event.target.value)}
       />
-      <IconButton className={classes.iconButton} onClick={() => submit(searchContent)}>
+      <IconButton className={classes.iconButton} onClick={() => submit(content)}>
         <SearchIcon />
       </IconButton>
     </Paper>
