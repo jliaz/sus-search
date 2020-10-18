@@ -10,7 +10,10 @@ interface ResultsInfoProps {
 const useStyles = makeStyles((theme) => ({
     root: {
       padding: theme.spacing(2),
-      maxWidth: '30%'
+      maxWidth: '30%',
+      borderRadius: '5px',
+      margin: theme.spacing(2),
+      position: 'fixed',
     },
     chip: {
         margin: theme.spacing(0.5),
@@ -40,29 +43,28 @@ const ResultsInfo = (props: ResultsInfoProps): React.ReactElement => {
     }
     
     return(
-        <Grid
-            container
-            direction="column"
-            justify="flex-start"
-            alignItems="flex-start"
-            className={classes.root}
-        >
-            <Grid item>
-                <Typography component="h6" color="secondary">
-                    <Box fontSize="h6.fontSize" m={1}>
-                        Showing results for...
-                    </Box>
-                </Typography>
+        <Box boxShadow={3} className={classes.root}>
+            <Grid
+                container
+                direction="column"
+                justify="flex-start"
+                alignItems="flex-start"
+            >
+                <Grid item>
+                    <Typography component="h6" color="secondary">
+                        <Box fontSize="h6.fontSize" m={1}>
+                            Showing results for...
+                        </Box>
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <img src={imgSrc} alt="Logo" style={{ width: '100%' }} />
+                </Grid>
+                <Grid item>
+                    { renderAttributeChips() }
+                </Grid>
             </Grid>
-            <Grid item>
-                <img src={imgSrc} alt="Logo" style={{ width: '100%' }} />
-            </Grid>
-            <Grid item>
-                { renderAttributeChips() }
-            </Grid>
-
-
-        </Grid>
+        </Box>
     )
 }
 
