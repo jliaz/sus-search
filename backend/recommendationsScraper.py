@@ -3,6 +3,19 @@ import csv
 import os
 import requests
 
+def storymfg(imageLinks, prices, productLinks, productNames, companies, link):
+    page = requests.get(link)
+    soup = bs(page.text, 'html.parser')
+
+    for product in soup.find_all(name="div", attrs={"class": "item"}):
+        a = product.find(name="a")
+        productLinks.append("https://www.storymfg.com" + a["href"])
+        imageLinks.append("https:" + a.find(name="img")["data-src"].replace("{width}", "900"))
+        productNames.append(a.find_all(name="p")[0].text)
+        prices.append(a.find(name="p", attrs={"class": "color--primary-meta m0 font-size__basic"}).text.strip())
+        companies.append("Story mfg")
+
+
 def tuckerman(imageLinks, prices, productLinks, productNames, companies, link):
     page = requests.get(link)
     soup = bs(page.text, 'html.parser')
@@ -56,7 +69,7 @@ def biancaspender(imageLinks, prices, productLinks, productNames, companies):
             productLinks.append("https://biancaspender.com" + a["href"])
             for picture in a.find_all(name="picture"):
                 for img in picture.find_all(name="img"):
-                    imageLinks.append(img["data-src"])
+                    imageLinks.append("https:" + img["data-src"])
     del imageLinks[0::2]
     del prices[0::2]
     del productLinks[0::2]
@@ -77,6 +90,8 @@ def main():
     ethicalsilkcompany(imageLinks, prices, productLinks, productNames, companies, 'https://www.theethicalsilkcompany.com/shop')
     tuckerman(imageLinks, prices, productLinks, productNames, companies, 'https://www.tuckerman.co/collections/mens-shirts')
     tuckerman(imageLinks, prices, productLinks, productNames, companies, 'https://www.tuckerman.co/collections/womens-shirts')
+    storymfg(imageLinks, prices, productLinks, productNames, companies, 'https://www.storymfg.com/collections/shop-all')
+
     # create table
     # for i in range(0, len(imageLinks)):
         #print(productNames[i], prices[i], imageLinks[i], productLinks[i], companies[i])
