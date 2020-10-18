@@ -1,10 +1,8 @@
 import React from 'react';
-
 import Search from '../components/Search';
 import ImageSearchButton from '../components/ImageSearchButton';
 import Header from '../components/Header';
-import { Grid, GridListTileBar, makeStyles } from '@material-ui/core';
-import ProductCard from '../components/ProductCard';
+import { Grid, makeStyles } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
 
 interface HomePageProps {
