@@ -1,14 +1,5 @@
 import React from 'react';
 import Recommendations from '../components/Recommendations';
-
-interface RecommendationSpecs {
-  productName: string,
-  companyName: string,
-  price: number,
-  productLink: string,
-  imageLink: string,
-}
-
 import ResultsInfo from '../components/ResultsInfo';
 
 import { Grid, makeStyles } from '@material-ui/core';
@@ -17,6 +8,16 @@ import { Grid, makeStyles } from '@material-ui/core';
 interface ResultsPageProps {
 
 }
+
+
+interface RecommendationSpecs {
+    productName: string,
+    companyName: string,
+    price: number,
+    productLink: string,
+    imageLink: string,
+  }
+  
 
 const useStyles = makeStyles((theme) => ({
     root: {
