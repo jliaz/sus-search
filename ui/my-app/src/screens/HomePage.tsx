@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: '35%',
   },
+  header: {
+      marginBottom: theme.spacing(3)
+  }
 }));
 
 const HomePage = (props: HomePageProps): React.ReactElement => {
@@ -25,9 +28,8 @@ const HomePage = (props: HomePageProps): React.ReactElement => {
         justify="center"
         alignItems="center"
         className={classes.root}
-        spacing={4}
       >
-        <Grid item>
+        <Grid item className={classes.header}>
             <Header/>
         </Grid>
         <Grid
