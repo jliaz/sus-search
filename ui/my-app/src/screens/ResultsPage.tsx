@@ -52,8 +52,11 @@ const ResultsPage = (props: ResultsPageProps): React.ReactElement => {
     // GET request using fetch inside useEffect React hook
     fetch('http://127.0.0.1:5000/imageSearch?uri=https://cdn.shopify.com/s/files/1/0373/2642/2152/products/IMG_2918_420x.jpg?v=1602820943')
         .then(response => {
-          console.log(response)
-        });
+          console.log('response:', JSON.stringify(response))
+        })
+        .then(data => {
+            console.log('data', data)
+        })
 
   // empty dependency array means this effect will only run once (like componentDidMount in classes)
   }, []);
