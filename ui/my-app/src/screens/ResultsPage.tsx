@@ -24,7 +24,7 @@ interface RecommendationSpecs {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minHeight: '2000px'
+   
   },
 
 }));
@@ -34,25 +34,26 @@ const ResultsPage = (props: ResultsPageProps): React.ReactElement => {
   const [recommendations, setRecommendations] = useState<Array<RecommendationSpecs>>([]);
 
   const [searchedImage, setSearchedImage] = useState('');
+  const [searchedText, setSearchedText] = useState('');
 
   useEffect(() => {
     const search = window.location.search;
     const params = new URLSearchParams(search);
     const img = params.get('img');
-    console.log('imageLink', img);
+    const txt = params.get('search');
     setSearchedImage(img || '');
+    setSearchedText(txt || '');
     // GET request using fetch inside useEffect React hook
     axios.get(`http://127.0.0.1:5000/imageSearch?uri=${img}`)
     .then(res => {
         const data = res.data;
         setRecommendations(data.results);
     })
-
   // empty dependency array means this effect will only run once (like componentDidMount in classes)
-  }, []);
+  });
   return (
     <>
-      <ResultsInfo image={searchedImage}/>
+      <ResultsInfo image={searchedImage} text={searchedText}/>
       <Recommendations specs={recommendations}/>
     </>
     

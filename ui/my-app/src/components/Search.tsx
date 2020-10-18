@@ -40,7 +40,7 @@ const Search = (props: SearchProps): React.ReactElement => {
     <Paper component="form" className={classes.root}>
       <InputBase
         className={classes.input}
-        placeholder={placeholderText ? placeholderText : 'Search...'}
+        placeholder={placeholderText ? placeholderText : 'Search or enter image URL'}
         color="secondary"
         onChange={(event) => setContent(event.target.value)}
       />

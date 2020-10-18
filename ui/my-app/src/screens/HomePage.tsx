@@ -39,7 +39,7 @@ const HomePage = (props: HomePageProps): React.ReactElement => {
     } else {
         history.push({
             pathname: '/results',
-            search: searchText
+            search: `search=${searchText}`
           });
     }
   }
@@ -48,8 +48,7 @@ const HomePage = (props: HomePageProps): React.ReactElement => {
       console.log('image searccch');
       history.push({
           pathname: '/results',
-          search: `img=${img}`,
-          state: { detail: {img: {img} }}
+          search: `uploadedImg=${img}`,
       });
   }
 

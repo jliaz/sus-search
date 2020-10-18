@@ -5,6 +5,7 @@ import { Grid, makeStyles, Typography, Box, Chip } from '@material-ui/core';
 
 interface ResultsInfoProps {
     image: string;
+    text: string;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ResultsInfo = (props: ResultsInfoProps): React.ReactElement => {
-    const { image } = props;
+    const { image, text } = props;
     const classes = useStyles();
     const attributes = ['Pants', 'Denim', 'Light Blue', 'Sweater'];
     
@@ -59,7 +60,15 @@ const ResultsInfo = (props: ResultsInfoProps): React.ReactElement => {
                     </Typography>
                 </Grid>
                 <Grid item>
-                    <img src={image} alt="Logo" style={{ width: '100%' }} />
+                {/* <img src={image} alt="Logo" style={{ width: '100%' }}/> */}
+                    {image !== '' ?
+                        <img src={image} alt="Logo" style={{ width: '100%' }}/> :
+                        <Typography component="p" color="secondary">
+                            <Box fontSize="p" m={1}>
+                                { text }
+                            </Box>
+                        </Typography>
+                    }
                 </Grid>
                 <Grid item>
                     {renderAttributeChips()}

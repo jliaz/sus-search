@@ -32,13 +32,12 @@ const Header = (props: HeaderProps): React.ReactElement => {
         <Grid item>
           <Typography component="h6" color="secondary" className={classes.typography}>
             <Box fontSize={inAppBar ? "h6.fontSize" : "h3.fontSize"} m={1}>
-              SusSearch
+              SlowMoIt
                 </Box>
           </Typography>
         </Grid>
       </Grid>
     </Link>
-
   )
 }
 
