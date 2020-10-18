@@ -1,5 +1,4 @@
-# SlowMoIt
-DubHacks 2020 canvas track
+# SlowMoIt - DubHacks 2020
 
 ![](results.png)
 
