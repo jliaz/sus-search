@@ -1,5 +1,7 @@
 from flask import Flask
 from flask import request, jsonify
+from flask_cors import CORS
+
 # Google Cloud API 
 import os
 from google.cloud import vision
@@ -16,15 +18,15 @@ import csv
 from search import *
 
 app = Flask(__name__)
-
+CORS(app)
 
 PROJECT_ID = 'dubhacks-292818'
 LOCATION_ID = 'us-east1'
-PRODUCT_SET_ID = 'recommendations'
+PRODUCT_SET_ID = 'product_set'
 PRODUCT_CATEGORY = 'apparel-v2'
-IMAGE_BUCKET = 'dubhacks-images-bucket'
+IMAGE_BUCKET = 'dubhacks-ref-images'
 VISION_BUCKET = 'dubhacks-vision-bucket'
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'content/dubhacks-a3a38c1cfcb3.json' # TODO
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'content/dubhacks-292818-f5faadd48adf.json'
 os.environ['PROJECT_ID'] = PROJECT_ID
 os.environ['LOCATION_ID'] = LOCATION_ID
 
@@ -40,6 +42,6 @@ def getImageSearches():
 	search_results = jsonify(results=search_results)
 	print("API RESULTS")
 	print(search_results)
-	return "Succes"
+	return search_results
 
 

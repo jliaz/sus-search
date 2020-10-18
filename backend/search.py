@@ -13,13 +13,52 @@ import csv
 # environment variables
 PROJECT_ID = 'dubhacks-292818'
 LOCATION_ID = 'us-east1'
-PRODUCT_SET_ID = 'recommendations'
+PRODUCT_SET_ID = 'product_set'
 PRODUCT_CATEGORY = 'apparel-v2'
-IMAGE_BUCKET = 'dubhacks-images-bucket'
+IMAGE_BUCKET = 'dubhacks-ref-images'
 VISION_BUCKET = 'dubhacks-vision-bucket'
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/content/dubhacks-a3a38c1cfcb3.json' # TODO
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/content/dubhacks-292818-f5faadd48adf.json' # TODO
 os.environ['PROJECT_ID'] = PROJECT_ID
 os.environ['LOCATION_ID'] = LOCATION_ID
+
+def get_reference_image_uri(
+        project_id, location, product_id):
+    """List all images in a product.
+    Args:
+        project_id: Id of the project.
+        location: A compute region name.
+        product_id: Id of the product.
+    """
+    client = vision.ProductSearchClient()
+
+    # Get the full path of the product.
+    product_path = client.product_path(
+        project=project_id, location=location, product=product_id)
+
+    # List all the reference images available in the product.
+    reference_images = client.list_reference_images(parent=product_path)
+
+    # Display the reference image information.
+    for image in reference_images:
+      return image.uri
+    #     print('Reference image name: {}'.format(image.name))
+    #     print('Reference image id: {}'.format(image.name.split('/')[-1]))
+    #     print('Reference image uri: {}'.format(image.uri))
+    #     print('Reference image bounding polygons: {}'.format(
+    #         image.bounding_polys))
+
+
+def get_image_metadata(bucket_name, blob_name):
+    """Prints out a blob's metadata."""
+    # bucket_name = 'your-bucket-name'
+    # blob_name = 'your-object-name'
+
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.get_blob(blob_name)
+
+    return blob.metadata
+
 
 
 def convert(labelsStr):
@@ -87,19 +126,12 @@ def get_similar_products_uri(
         product = result.product
 
         print('Score(Confidence): {}'.format(result.score))
-        print('Image name: {}'.format(result.image))
-
-        print('Product name: {}'.format(product.name))
-        print('Product display name: {}'.format(
-            product.display_name))
-        print('Product description: {}'.format(product.description))
-        # labels.append(str(product.product_labels))
-        labels = convert(str(product.product_labels))
-        print('Product labels:'.format(labels))
-        for key,val in labels.items():
-          print(f'{key}: {val}')
-        print()
-        output.append(labels)
+        product_id = product.name.split('/')[-1]
+        image_uri = get_reference_image_uri(PROJECT_ID, LOCATION_ID, product_id)
+        blob_name = image_uri.split('/')[-1]
+        meta = get_image_metadata(IMAGE_BUCKET, blob_name)
+        print("Product Info: ", meta)
+        output.append(meta)
    	
     
     return output
