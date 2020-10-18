@@ -33,9 +33,16 @@ const ResultsPage = (props: ResultsPageProps): React.ReactElement => {
   const classes = useStyles();
   const [recommendations, setRecommendations] = useState<Array<RecommendationSpecs>>([]);
 
+  const [searchedImage, setSearchedImage] = useState('');
+
   useEffect(() => {
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const img = params.get('img');
+    console.log('imageLink', img);
+    setSearchedImage(img || '');
     // GET request using fetch inside useEffect React hook
-    axios.get(`http://127.0.0.1:5000/imageSearch?uri=https://cdn.shopify.com/s/files/1/0373/2642/2152/products/IMG_2918_420x.jpg?v=1602820943`)
+    axios.get(`http://127.0.0.1:5000/imageSearch?uri=${img}`)
     .then(res => {
         const data = res.data;
         setRecommendations(data.results);
@@ -45,9 +52,8 @@ const ResultsPage = (props: ResultsPageProps): React.ReactElement => {
   }, []);
   return (
     <>
-      <ResultsInfo/>
-          <Recommendations
-            specs={recommendations}/>
+      <ResultsInfo image={searchedImage}/>
+      <Recommendations specs={recommendations}/>
     </>
     
   )
