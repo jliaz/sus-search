@@ -22,10 +22,12 @@ interface RecommendationSpecs {
 const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: '2000px'
-  }
+  },
+
 }));
 
 const ResultsPage = (props: ResultsPageProps): React.ReactElement => {
+  const classes = useStyles();
   const Rec1Specs = {
     productName: "O'Sullivan Coat",
     companyName: "A Kind of Guise",
@@ -54,8 +56,12 @@ const ResultsPage = (props: ResultsPageProps): React.ReactElement => {
   ]
 
   return (
-    <Recommendations
-      specs={recommendations}></Recommendations>
+    <>
+      <ResultsInfo/>
+          <Recommendations
+            specs={recommendations}/>
+    </>
+    
   )
 }
 
