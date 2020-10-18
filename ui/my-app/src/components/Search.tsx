@@ -4,7 +4,7 @@ import React from 'react';
 
 
 interface SearchProps {
-
+    placeholderText?: string;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -18,9 +18,6 @@ const useStyles = makeStyles((theme) => ({
   input: {
     marginLeft: theme.spacing(1),
     flex: 1,
-    [`& fieldset`]: {
-        borderRadius: 50,
-      },
   },
   iconButton: {
     padding: 10,
@@ -33,12 +30,13 @@ function submit() {
 
 const Search = (props: SearchProps): React.ReactElement => {
   const classes = useStyles();
+  const { placeholderText } = props;
 
   return (
     <Paper component="form" className={classes.root}>
       <InputBase
         className={classes.input}
-        placeholder="Search..."
+        placeholder={placeholderText ? placeholderText : 'Search...'}
         color="secondary"
       />
       <IconButton type="submit" className={classes.iconButton} onClick={() => submit()}>
