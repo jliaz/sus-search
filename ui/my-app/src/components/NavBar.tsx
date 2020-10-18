@@ -22,12 +22,33 @@ const NavBar = (props: NavBarProps): React.ReactElement => {
     console.log(window.location.pathname);
     const history = useHistory();
 
+    const isUrl = (searchText: string) => {
+        return(searchText.match(/\.(jpeg|jpg|gif|png)$/) != null);
+    }
+
     const onSearch = (searchText: string) => {
+        console.log("SEARCHHHH");
+        if (isUrl(searchText)) {
+            history.push({
+                pathname: '/results',
+                search: `img=${searchText}`
+            })
+        } else {
+            history.push({
+                pathname: '/results',
+                search: searchText
+              });
+        }
+    }
+
+    const onImageSearch = (img: string) => {
+        console.log('image searccch');
         history.push({
             pathname: '/results',
-            search: searchText
+            search: `img=${img}`
         });
     }
+    
     return (
         <div>
             <AppBar position="static" color="transparent" className={classes.appBar}>
@@ -47,7 +68,7 @@ const NavBar = (props: NavBarProps): React.ReactElement => {
                             >
                                 <Grid item> <Header inAppBar={true} /> </Grid>
                                 <Grid item> <Search placeholderText="Search another..." onSearch={onSearch}></Search> </Grid>
-                                <Grid item> <ImageSearchButton></ImageSearchButton> </Grid>
+                                <Grid item> <ImageSearchButton onSearch={onImageSearch}></ImageSearchButton> </Grid>
                             </Grid> :
                             <div></div>}
                     </Grid>
