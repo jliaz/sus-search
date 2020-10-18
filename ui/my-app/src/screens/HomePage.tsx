@@ -25,12 +25,32 @@ const HomePage = (props: HomePageProps): React.ReactElement => {
 
   console.log(history);
 
+  const isUrl = (searchText: string) => {
+    return(searchText.match(/\.(jpeg|jpg|gif|png)$/) != null);
+  }
+
   const onSearch = (searchText: string) => {
-    console.log("SEARCHHHH");
-    history.push({
-      pathname: '/results',
-      search: searchText
-    });
+    console.log("SEARCHHHH", searchText);
+    if (isUrl(searchText)) {
+        history.push({
+            pathname: '/results',
+            search: `img=${searchText}`
+        })
+    } else {
+        history.push({
+            pathname: '/results',
+            search: searchText
+          });
+    }
+  }
+
+  const onImageSearch = (img: string) => {
+      console.log('image searccch');
+      history.push({
+          pathname: '/results',
+          search: `img=${img}`,
+          state: { detail: {img: {img} }}
+      });
   }
 
   return (
@@ -51,7 +71,7 @@ const HomePage = (props: HomePageProps): React.ReactElement => {
         alignItems="center"
       >
         <Search onSearch={onSearch}></Search>
-        <ImageSearchButton></ImageSearchButton>
+        <ImageSearchButton onSearch={onImageSearch}></ImageSearchButton>
       </Grid>
     </Grid>
   )
