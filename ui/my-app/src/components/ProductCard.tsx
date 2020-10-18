@@ -27,11 +27,12 @@ const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 350,
         minWidth: 350,
+        minHeight: 630,
+        maxHeight: 630,
         margin: theme.spacing(2),
     },
     media: {
         height: 450,
-
     },
 }));
 
@@ -51,6 +52,15 @@ const ProductCard = (props: ProductCardProps): React.ReactElement => {
         return newName;
     }
 
+    const fixDollarSign = (price: string): string => {
+        var regex = new RegExp('^[1-9]');
+        if (regex.test(price[0])) {
+            return '$' + price;
+        } else {
+            return price;
+        }
+    }
+
     return (
         <Card className={classes.root}>
             <CardActionArea>
@@ -64,13 +74,13 @@ const ProductCard = (props: ProductCardProps): React.ReactElement => {
                         {fixCasing(productName)}
                     </Typography>
                     <Typography variant="subtitle1" component="p">
-                        {companyName} · {price}
+                        {companyName} · {fixDollarSign(String(price))}
                     </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Grid container justify="center">
-                    <Button target="_blank" href={productLink} >
+                <Grid container direction="column" justify="flex-end" alignItems="center">
+                    <Button target="_blank" href={productLink}>
                         See Product
                     </Button>
                 </Grid>
