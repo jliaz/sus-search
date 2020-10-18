@@ -39,7 +39,7 @@ const HomePage = (props: HomePageProps): React.ReactElement => {
     } else {
         history.push({
             pathname: '/results',
-            search: searchText
+            search: `search=${searchText}`
           });
     }
   }

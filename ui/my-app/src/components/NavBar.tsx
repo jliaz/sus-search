@@ -37,7 +37,7 @@ const NavBar = (props: NavBarProps): React.ReactElement => {
         } else {
             history.push({
                 pathname: '/results',
-                search: searchText
+                search: `search=${searchText}`
               });
         }
     }
