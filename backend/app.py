@@ -57,6 +57,16 @@ def getImageSearches():
 	search_results = jsonify(search_results)
 	return search_results
 
+@app.route("/getLabels", methods=["GET"])
+def getLabels():
+	if request.method == "GET":
+		image_uri = request.args.get('uri')
+		search_results = detect_labels_uri(image_uri)
+		print(search_results)
+		search_results = str(search_results)
+		print("API RESULTS")
+		print(search_results)
+		return search_results
 	
 
 @app.route("/textSearch", methods=["GET"])
