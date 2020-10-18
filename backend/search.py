@@ -21,6 +21,26 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/content/dubhacks-292818-f5faadd
 os.environ['PROJECT_ID'] = PROJECT_ID
 os.environ['LOCATION_ID'] = LOCATION_ID
 
+def detect_labels_uri(uri):
+    """Detects labels in the file located in Google Cloud Storage or on the
+    Web."""
+    client = vision.ImageAnnotatorClient()
+    image = vision.Image()
+    image.source.image_uri = uri
+
+    response = client.label_detection(image=image)
+    labels = response.label_annotations
+
+    # for label in labels:
+    #     print(label.description)
+    print(response.error)
+    if response.error.message:
+        raise Exception(
+            '{}'+uri+'\nFor more info on error messages, check: '
+            'https://cloud.google.com/apis/design/errors'.format(
+                response.error.message))
+    return [label.description for label in labels]
+
 def get_reference_image_uri(
         project_id, location, product_id):
     """List all images in a product.
