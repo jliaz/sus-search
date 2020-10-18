@@ -16,13 +16,14 @@ function App() {
   /** Global colour palette */
   const theme = createMuiTheme({
     palette: {
-      primary: { main: '#A1E2FF'},
+      primary: { main: '#7289DA'},
       secondary: { main: '#FCFAF8'},
+      background: { default: '#36393f'},
     }
   })
   
   return (
-    <div className="App">
+    <div className="App" color='background'>
       <CssBaseline />
       <ThemeProvider theme={theme}>
         <Router>
@@ -36,7 +37,6 @@ function App() {
           </Switch>
         </Router>
       </ThemeProvider>
-      
     </div>
   );
 }
