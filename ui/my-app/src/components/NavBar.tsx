@@ -2,6 +2,7 @@ import React from 'react';
 
 import Search from '../components/Search';
 import ImageSearchButton from '../components/ImageSearchButton';
+import Header from '../components/Header';
 import { Grid, AppBar, makeStyles, Button } from '@material-ui/core';
 
 interface NavBarProps {
@@ -10,7 +11,9 @@ interface NavBarProps {
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
-        boxShadow: 'none'
+        boxShadow: 'none',
+        padding: theme.spacing(2),
+        minHeight: '65px'
     }
   }));
 
@@ -26,27 +29,21 @@ const NavBar = (props: NavBarProps): React.ReactElement => {
                     justify="space-between"
                     alignItems="center"
                 >
-                    <Grid
-                        item
-                    >
+                    <Grid item>
+                        {window.location.pathname !== '/' ? 
                         <Grid
                             container
                             direction="row"
-                            justify="center"
                             alignItems="center"
+                            spacing={1}
                         >
-                            {window.location.pathname !== '/' ? 
-                            <>
-                                <Search></Search>
-                                <ImageSearchButton></ImageSearchButton>
-                            </> : 
-                            <div></div>}
-                            
-                        </Grid>
+                            <Grid item> <Header/> </Grid>
+                            <Grid item> <Search></Search> </Grid>
+                            <Grid item> <ImageSearchButton></ImageSearchButton> </Grid>
+                        </Grid> : 
+                        <div></div>}
                     </Grid>
-                    <Grid
-                        item
-                    >
+                    <Grid item>
                         <Button>
                             Discover
                         </Button>
