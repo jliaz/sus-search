@@ -17,6 +17,10 @@ interface RecommendationsProps {
 const useStyles = makeStyles((theme) => ({
     card: {
         margin: theme.spacing(2),
+    }, 
+    root: {
+        maxWidth: '65%',
+        marginLeft: '30%'
     }
 }));
 
@@ -47,7 +51,7 @@ const Recommendations = (props: RecommendationsProps): React.ReactElement => {
     };
 
     return (
-        <div>
+        <div className={classes.root}>
             { renderRecommendations()}
         </div>
     )
