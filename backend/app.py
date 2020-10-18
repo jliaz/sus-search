@@ -35,15 +35,29 @@ os.environ['LOCATION_ID'] = LOCATION_ID
 def test():
 	return "Flask API is running correctly"
 
-@app.route("/imageSearch", methods=["GET"])
+@app.route("/imageSearch", methods=["GET", "POST"])
 def getImageSearches():
-	image_uri = request.args.get('uri')
-	search_results = get_similar_products_uri(PROJECT_ID, LOCATION_ID, PRODUCT_SET_ID, 'apparel-v2', image_uri, '')
+	if request.method == "GET":
+		image_uri = request.args.get('uri')
+		search_results = get_similar_products_uri(PROJECT_ID, LOCATION_ID, PRODUCT_SET_ID, 'apparel-v2', image_uri, '')
+		print(search_results)
+		search_results = jsonify(search_results)
+		print("API RESULTS")
+		print(search_results)
+		return search_results
+	
+	# Otherwise it is a post request and we need to get the file
+	if 'file' not in request.files:
+		return "No file was uploaded!"
+	image_path = request.files['file']
+	file1.save('./' + image_path.filename)
+	search_results = get_similar_products_file(PROJECT_ID, LOCATION_ID, PRODUCT_SET_ID, 'apparel-v2', './' + image_path.filename, '')
+	print("API RESULTS - FILE UPLOAD")
 	print(search_results)
 	search_results = jsonify(search_results)
-	print("API RESULTS")
-	print(search_results)
 	return search_results
+
+	
 
 @app.route("/textSearch", methods=["GET"])
 def getTextSearches():

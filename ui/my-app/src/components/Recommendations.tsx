@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     }, 
     root: {
         maxWidth: '65%',
+        marginLeft: 600,
         
     }
 }));
