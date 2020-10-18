@@ -5,34 +5,36 @@ import Box from '@material-ui/core/Box';
 import { Grid, makeStyles } from '@material-ui/core'
 
 interface HeaderProps {
-    inAppBar?: boolean
+  inAppBar?: boolean
 }
 
 const useStyles = makeStyles((theme) => ({
-  }));
+  typography: {
+    fontFamily: '"Crimson Text"',
+  },
+}));
 
 const Header = (props: HeaderProps): React.ReactElement => {
-    const classes = useStyles();
-    const { inAppBar } = props;
-    return(
-      <Grid
-        container
-        justify="flex-start"
-        alignItems="center"
-        onClick={()=> {console.log("clicked on header")}} //todo: redirect to homepage on click
-      >
-          <Grid item>
-            <img src={logo} alt="Logo" style={{width: inAppBar ? "40px" : "60px"}}/>
-          </Grid>
-          <Grid item>
-            <Typography component="h6" color="secondary">
-                <Box fontSize={inAppBar ? "h6.fontSize" : "h4.fontSize"} m={1}>
-                    SusSearch
-                </Box>
-            </Typography>
-          </Grid>
+  const classes = useStyles();
+  const { inAppBar } = props;
+  return (
+    <Grid
+      container
+      justify="flex-start"
+      alignItems="center"
+    >
+      <Grid item>
+        <img src={logo} alt="Logo" style={{ width: inAppBar ? "40px" : "60px" }} />
       </Grid>
-    )
+      <Grid item>
+        <Typography component="h6" color="secondary" className={classes.typography}>
+          <Box fontSize={inAppBar ? "h6.fontSize" : "h3.fontSize"} m={1}>
+            SusSearch
+                </Box>
+        </Typography>
+      </Grid>
+    </Grid>
+  )
 }
 
 export default Header;

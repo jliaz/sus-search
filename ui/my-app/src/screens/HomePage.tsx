@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     top: '35%',
   },
   header: {
-      marginBottom: theme.spacing(3)
+    marginBottom: theme.spacing(3)
   }
 }));
 
@@ -35,11 +35,21 @@ const HomePage = (props: HomePageProps): React.ReactElement => {
   }
 
   return (
-      <Grid 
+    <Grid
+      container
+      justify="center"
+      alignItems="center"
+      className={classes.root}
+    >
+      <Grid item className={classes.header}>
+        <Header />
+      </Grid>
+      <Grid
         container
+        item
+        direction="row"
         justify="center"
         alignItems="center"
-        className={classes.root}
       >
         <Grid item className={classes.header}>
             <Header/>
@@ -55,7 +65,8 @@ const HomePage = (props: HomePageProps): React.ReactElement => {
             <ImageSearchButton></ImageSearchButton>
         </Grid>
       </Grid>
-    
+    </Grid>
+
 
   )
 }
