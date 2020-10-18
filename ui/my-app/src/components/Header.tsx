@@ -5,40 +5,33 @@ import Box from '@material-ui/core/Box';
 import { Grid, makeStyles } from '@material-ui/core'
 
 interface HeaderProps {
-
+    inAppBar?: boolean
 }
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-     
-    },
-    logo: {
-        width: '40px'
-    }
   }));
 
 const Header = (props: HeaderProps): React.ReactElement => {
     const classes = useStyles();
-  return(
+    const { inAppBar } = props;
+    return(
       <Grid
         container
         justify="flex-start"
         alignItems="center"
-        className={classes.root}
       >
           <Grid item>
-            <img src={logo} alt="Logo" className={classes.logo} />
+            <img src={logo} alt="Logo" style={{width: inAppBar ? "40px" : "60px"}}/>
           </Grid>
           <Grid item>
-            <Typography component="h6">
-                <Box fontSize="h6.fontSize" m={1}>
+            <Typography component="h6" color="secondary">
+                <Box fontSize={inAppBar ? "h6.fontSize" : "h4.fontSize"} m={1}>
                     SusSearch
                 </Box>
             </Typography>
           </Grid>
       </Grid>
-        
-  )
+    )
 }
 
 export default Header;

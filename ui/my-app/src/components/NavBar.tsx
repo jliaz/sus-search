@@ -37,17 +37,17 @@ const NavBar = (props: NavBarProps): React.ReactElement => {
                             alignItems="center"
                             spacing={1}
                         >
-                            <Grid item> <Header/> </Grid>
+                            <Grid item> <Header inAppBar={true}/> </Grid>
                             <Grid item> <Search></Search> </Grid>
                             <Grid item> <ImageSearchButton></ImageSearchButton> </Grid>
                         </Grid> : 
                         <div></div>}
                     </Grid>
                     <Grid item>
-                        <Button>
+                        <Button color="secondary">
                             Discover
                         </Button>
-                        <Button>
+                        <Button color="secondary">
                             Login
                         </Button>
                     </Grid>
