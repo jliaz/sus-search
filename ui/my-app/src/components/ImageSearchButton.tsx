@@ -7,7 +7,7 @@ interface ImageSearchButtonProps {
 }
 
 function submit() {
-  alert('t r i g g e r e d');
+  alert('robbie sucks');
 }
 
 const useStyles = makeStyles((theme) => ({
