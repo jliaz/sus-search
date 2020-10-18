@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Route, Switch } from 'react-router';
+import { Route, Switch } from 'react-router';
 import { BrowserRouter as Router } from "react-router-dom";
 
 import HomePage from './screens/HomePage';
@@ -12,23 +12,30 @@ import {
 } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
+
 function App() {
 
   /** Global colour palette */
   const theme = createMuiTheme({
     palette: {
-      primary: { main: '#A1E2FF'},
-      secondary: { main: '#FCFAF8'},
-      background: { default: '#36393f'},
+      primary: { main: '#A1E2FF' },
+      secondary: { main: '#FCFAF8' },
+      background: { default: '#36393f' },
+    },
+    typography: {
+      fontFamily: [
+        'Roboto',
+        '"Crimson Text"',
+      ].join(','),
     }
   })
-  
+
   return (
     <div className="App" color='background'>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <NavBar/>
         <Router>
+          <NavBar/>
           <Switch>
             <Route exact path="/">
               <HomePage />
