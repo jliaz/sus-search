@@ -1,10 +1,11 @@
 import { IconButton, InputBase, makeStyles, Paper, } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import React, { useState } from 'react';
-
+import { useHistory } from "react-router-dom";
 
 interface SearchProps {
   placeholderText?: string;
+  onSearch: Function;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -24,15 +25,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function submit(content: string) {
-  console.log(content);
-}
-
 const Search = (props: SearchProps): React.ReactElement => {
+  const { placeholderText, onSearch } = props;
   const classes = useStyles();
-  const { placeholderText } = props;
 
   const [content, setContent] = useState("");
+
+  const onClick = (searchText: string) => {
+    console.log(searchText);
+    onSearch(searchText);
+  }
 
   return (
     <Paper component="form" className={classes.root}>
@@ -42,7 +44,7 @@ const Search = (props: SearchProps): React.ReactElement => {
         color="secondary"
         onChange={(event) => setContent(event.target.value)}
       />
-      <IconButton className={classes.iconButton} onClick={() => submit(content)}>
+      <IconButton className={classes.iconButton} onClick={() => onClick(content)}>
         <SearchIcon />
       </IconButton>
     </Paper>

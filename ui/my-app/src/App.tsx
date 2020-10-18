@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
+
 function App() {
 
   /** Global colour palette */
@@ -33,8 +34,8 @@ function App() {
     <div className="App" color='background'>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <NavBar />
         <Router>
+          <NavBar/>
           <Switch>
             <Route exact path="/">
               <HomePage />
