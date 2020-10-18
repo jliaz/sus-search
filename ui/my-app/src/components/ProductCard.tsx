@@ -18,7 +18,7 @@ interface ProductCardProps {
     imageLink: string,
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     cardAction: {
         display: 'block',
         textAlign: 'initial'
@@ -26,11 +26,12 @@ const useStyles = makeStyles({
     root: {
         maxWidth: 350,
         minWidth: 350,
+        margin: theme.spacing(2),
     },
     media: {
         height: 450,
     },
-});
+}));
 
 const ProductCard = (props: ProductCardProps): React.ReactElement => {
     const classes = useStyles();

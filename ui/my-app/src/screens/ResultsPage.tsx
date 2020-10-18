@@ -1,5 +1,14 @@
 import React, { useEffect } from 'react';
 import Recommendations from '../components/Recommendations';
+import ResultsInfo from '../components/ResultsInfo';
+
+import { Grid, makeStyles } from '@material-ui/core';
+
+
+interface ResultsPageProps {
+
+}
+
 
 interface RecommendationSpecs {
   productName: string,
@@ -9,9 +18,12 @@ interface RecommendationSpecs {
   imageLink: string,
 }
 
-interface ResultsPageProps {
 
-}
+const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: '2000px'
+  }
+}));
 
 const ResultsPage = (props: ResultsPageProps): React.ReactElement => {
   const Rec1Specs = {
@@ -46,11 +58,13 @@ const ResultsPage = (props: ResultsPageProps): React.ReactElement => {
   // empty dependency array means this effect will only run once (like componentDidMount in classes)
   }, []);
 
+  const recommendations: Array<RecommendationSpecs> = [
+    Rec1Specs, Rec2Specs, Rec3Specs, Rec3Specs, Rec3Specs, Rec3Specs, Rec3Specs, Rec3Specs, Rec3Specs,
+  ]
+
   return (
     <Recommendations
-      Rec1Specs={Rec1Specs}
-      Rec2Specs={Rec2Specs}
-      Rec3Specs={Rec3Specs}></Recommendations>
+      specs={recommendations}></Recommendations>
   )
 }
 

@@ -11,43 +11,45 @@ interface RecommendationSpecs {
 }
 
 interface RecommendationsProps {
-    Rec1Specs: RecommendationSpecs,
-    Rec2Specs: RecommendationSpecs,
-    Rec3Specs: RecommendationSpecs,
+    specs: Array<RecommendationSpecs>;
 }
 
-const useStyles = makeStyles({
-
-});
+const useStyles = makeStyles((theme) => ({
+    card: {
+        margin: theme.spacing(2),
+    }
+}));
 
 const Recommendations = (props: RecommendationsProps): React.ReactElement => {
-    return (
-        <Grid
-            container
-            direction="row"
-            justify="space-evenly"
-            alignItems="center"
-        >
-            <ProductCard
-                productName={props.Rec1Specs.productName}
-                companyName={props.Rec1Specs.companyName}
-                price={props.Rec1Specs.price}
-                productLink={props.Rec1Specs.productLink}
-                imageLink={props.Rec1Specs.imageLink}></ProductCard>
-            <ProductCard
-                productName={props.Rec2Specs.productName}
-                companyName={props.Rec2Specs.companyName}
-                price={props.Rec2Specs.price}
-                productLink={props.Rec2Specs.productLink}
-                imageLink={props.Rec2Specs.imageLink}></ProductCard>
-            <ProductCard
-                productName={props.Rec3Specs.productName}
-                companyName={props.Rec3Specs.companyName}
-                price={props.Rec3Specs.price}
-                productLink={props.Rec3Specs.productLink}
-                imageLink={props.Rec3Specs.imageLink}></ProductCard>
+    const classes = useStyles();
+    const { specs } = props;
 
-        </Grid>
+    const renderRecommendations = (): React.ReactElement => {
+        let code: Array<React.ReactElement> = [];
+        specs.forEach((spec) => {
+            code.push(<ProductCard
+                productName={spec.productName}
+                companyName={spec.companyName}
+                price={spec.price}
+                productLink={spec.productLink}
+                imageLink={spec.imageLink}></ProductCard>)
+        })
+        return (
+            <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="center"
+            >
+                {code}
+            </Grid>
+        )
+    };
+
+    return (
+        <div>
+            { renderRecommendations()}
+        </div>
     )
 }
 
