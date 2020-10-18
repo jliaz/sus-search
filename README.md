@@ -1,6 +1,8 @@
 # SlowMoIt
 DubHacks 2020 canvas track
 
+![](results.png)
+
 ## Inspiration
 Our project aims to answer the question, _How can e-commerce and consumption be ethical and sustainable while remaining efficient?_
 Specifically, SlowMoIt tackles the issue of fast fashion by increasing accessibility to sustainable brands.
