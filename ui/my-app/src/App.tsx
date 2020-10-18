@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Route, Switch } from 'react-router';
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -35,12 +35,14 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Router>
-          <NavBar/>
+          
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/" >
+              <NavBar atHome={true}/>
               <HomePage />
             </Route>
             <Route exact path="/results">
+              <NavBar atHome={false}/>
               <ResultsPage />
             </Route>
           </Switch>

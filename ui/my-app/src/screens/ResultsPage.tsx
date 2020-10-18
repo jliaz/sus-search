@@ -24,7 +24,7 @@ interface RecommendationSpecs {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minHeight: '2000px'
+   
   },
 
 }));

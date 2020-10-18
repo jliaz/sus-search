@@ -48,8 +48,7 @@ const HomePage = (props: HomePageProps): React.ReactElement => {
       console.log('image searccch');
       history.push({
           pathname: '/results',
-          search: `img=${img}`,
-          state: { detail: {img: {img} }}
+          search: `uploadedImg=${img}`,
       });
   }
 

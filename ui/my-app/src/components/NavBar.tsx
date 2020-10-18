@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Search from '../components/Search';
 import ImageSearchButton from '../components/ImageSearchButton';
 import Header from '../components/Header';
@@ -6,7 +6,7 @@ import { Grid, AppBar, makeStyles, Button } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
 
 interface NavBarProps {
-
+    atHome: boolean;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 const NavBar = (props: NavBarProps): React.ReactElement => {
     const classes = useStyles();
+    const { atHome } = props;
     console.log(window.location.pathname);
     const history = useHistory();
 
@@ -59,7 +60,7 @@ const NavBar = (props: NavBarProps): React.ReactElement => {
                     alignItems="center"
                 >
                     <Grid item>
-                        {window.location.pathname !== '/adadad' ?
+                        { !atHome ?
                             <Grid
                                 container
                                 direction="row"
