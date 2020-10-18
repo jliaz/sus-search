@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     top: '35%',
   },
   header: {
-      marginBottom: theme.spacing(3)
+    marginBottom: theme.spacing(3)
   }
 }));
 
@@ -23,27 +23,27 @@ const HomePage = (props: HomePageProps): React.ReactElement => {
   const classes = useStyles();
 
   return (
-      <Grid 
+    <Grid
+      container
+      justify="center"
+      alignItems="center"
+      className={classes.root}
+    >
+      <Grid item className={classes.header}>
+        <Header />
+      </Grid>
+      <Grid
         container
+        item
+        direction="row"
         justify="center"
         alignItems="center"
-        className={classes.root}
       >
-        <Grid item className={classes.header}>
-            <Header/>
-        </Grid>
-        <Grid
-            container
-            item
-            direction="row"
-            justify="center"
-            alignItems="center"
-        >
-            <Search></Search>
-            <ImageSearchButton></ImageSearchButton>
-        </Grid>
+        <Search></Search>
+        <ImageSearchButton></ImageSearchButton>
       </Grid>
-    
+    </Grid>
+
 
   )
 }
