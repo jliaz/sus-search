@@ -19,13 +19,14 @@ function App() {
     palette: {
       primary: { main: '#A1E2FF'},
       secondary: { main: '#FCFAF8'},
+      background: { default: '#36393f'},
     }
   })
   
   return (
-    <div className="App">
-      <CssBaseline />
+    <div className="App" color='background'>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <NavBar/>
         <Router>
           <Switch>

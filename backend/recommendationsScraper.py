@@ -3,6 +3,49 @@ import csv
 import os
 import requests
 
+
+def wuxly(imageLinks, prices, productLinks, productNames, companies, link):
+    page = requests.get(link)
+    soup = bs(page.text, 'html.parser')
+
+    products = soup.find(name="div", attrs={"class": "grid grid--uniform"})
+    for product in products.find_all(name="div", attrs={"class": "grid-product__content"}):
+        a = product.find(name="a")
+        imageLinks.append("https:" + a.find(name="div", attrs={"class": "grid__image-ratio grid__image-ratio--square lazyload"})["data-bgset"].split(",")[-1].strip().split(' ')[0])
+        productLinks.append("https://www.wixly.com" + a["href"])
+        productNames.append(a.find(name="div", attrs={"class": "grid-product__title"}).text)
+        prices.append(a.find(name="div", attrs={"class": "grid-product__price"}).text.strip())
+        companies.append("Wuxly")
+
+
+def thereformation(imageLinks, prices, productLinks, productNames, companies, link):
+    page = requests.get(link)
+    soup = bs(page.text, 'html.parser')
+
+    products = soup.find(name="div", attrs={"class": "product-grid product-grid--browse"})
+    for product in products.find_all(name="div", attrs={"class": "product-grid__cell"}):
+        a = product.find(name="a")
+        if a["href"][1:6] != "pages" and product.find(name="h2", attrs={"class": "product-summary__name"}) != None:
+            productLinks.append("https://www.thereformation.com" + a["href"])
+            imageLinks.append(a.find(name="img")["data-src"])
+            productNames.append(product.find(name="h2", attrs={"class": "product-summary__name"}).text.strip())
+            prices.append(product.find(name="p", attrs={"class": "product-prices__price"}).find(name="span").text.strip())
+            companies.append("The Reformation")
+
+
+def storymfg(imageLinks, prices, productLinks, productNames, companies, link):
+    page = requests.get(link)
+    soup = bs(page.text, 'html.parser')
+
+    for product in soup.find_all(name="div", attrs={"class": "item"}):
+        a = product.find(name="a")
+        productLinks.append("https://www.storymfg.com" + a["href"])
+        imageLinks.append("https:" + a.find(name="img")["data-src"].replace("{width}", "900"))
+        productNames.append(a.find_all(name="p")[0].text)
+        prices.append(a.find(name="p", attrs={"class": "color--primary-meta m0 font-size__basic"}).text.strip())
+        companies.append("Story mfg")
+
+
 def tuckerman(imageLinks, prices, productLinks, productNames, companies, link):
     page = requests.get(link)
     soup = bs(page.text, 'html.parser')
@@ -56,7 +99,7 @@ def biancaspender(imageLinks, prices, productLinks, productNames, companies):
             productLinks.append("https://biancaspender.com" + a["href"])
             for picture in a.find_all(name="picture"):
                 for img in picture.find_all(name="img"):
-                    imageLinks.append(img["data-src"])
+                    imageLinks.append("https:" + img["data-src"])
     del imageLinks[0::2]
     del prices[0::2]
     del productLinks[0::2]
@@ -77,6 +120,11 @@ def main():
     ethicalsilkcompany(imageLinks, prices, productLinks, productNames, companies, 'https://www.theethicalsilkcompany.com/shop')
     tuckerman(imageLinks, prices, productLinks, productNames, companies, 'https://www.tuckerman.co/collections/mens-shirts')
     tuckerman(imageLinks, prices, productLinks, productNames, companies, 'https://www.tuckerman.co/collections/womens-shirts')
+    storymfg(imageLinks, prices, productLinks, productNames, companies, 'https://www.storymfg.com/collections/shop-all')
+    thereformation(imageLinks, prices, productLinks, productNames, companies, 'https://www.thereformation.com/categories/all-clothing')
+    wuxly(imageLinks, prices, productLinks, productNames, companies, 'https://wuxly.com/collections/mens')
+    wuxly(imageLinks, prices, productLinks, productNames, companies, 'https://wuxly.com/collections/womens')
+
     # create table
     # for i in range(0, len(imageLinks)):
         #print(productNames[i], prices[i], imageLinks[i], productLinks[i], companies[i])

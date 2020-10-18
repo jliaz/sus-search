@@ -1,10 +1,10 @@
 import { IconButton, InputBase, makeStyles, Paper, } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import React from 'react';
+import React, { useState } from 'react';
 
 
 interface SearchProps {
-    placeholderText?: string;
+  placeholderText?: string;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '2px 4px',
     display: 'flex',
     alignItems: 'center',
-    width: 400,
+    width: 500,
     borderRadius: '50px'
   },
   input: {
@@ -24,13 +24,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function submit() {
-  alert("sus");
+function submit(content: string) {
+  console.log(content);
 }
 
 const Search = (props: SearchProps): React.ReactElement => {
   const classes = useStyles();
   const { placeholderText } = props;
+
+  const [content, setContent] = useState("");
 
   return (
     <Paper component="form" className={classes.root}>
@@ -38,8 +40,9 @@ const Search = (props: SearchProps): React.ReactElement => {
         className={classes.input}
         placeholder={placeholderText ? placeholderText : 'Search...'}
         color="secondary"
+        onChange={(event) => setContent(event.target.value)}
       />
-      <IconButton type="submit" className={classes.iconButton} onClick={() => submit()}>
+      <IconButton className={classes.iconButton} onClick={() => submit(content)}>
         <SearchIcon />
       </IconButton>
     </Paper>
